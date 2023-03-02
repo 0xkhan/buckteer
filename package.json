@@ -1,0 +1,28 @@
+{
+  "name": "nomadbindle",
+  "version": "1.0.0",
+  "description": "Application for organising your bucket lists and trips",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xkhan/nomadbindle.git"
+  },
+  "author": "https://github.com/0xkhan",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/0xkhan/nomadbindle/blob/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/0xkhan/nomadbindle/issues"
+  },
+  "homepage": "https://github.com/0xkhan/nomadbindle#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.2.1",
+    "parcel": "^2.2.1"
+  }
+}

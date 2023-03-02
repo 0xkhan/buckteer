@@ -1,0 +1,29 @@
+@use '../abstracts' as *;
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+
+    @include respond(phone) {
+        font-size: 50%;
+    }
+}
+
+body {
+    box-sizing: border-box;
+}
+
+a {
+    &:link,
+    &:visited {
+        color: inherit;
+        text-decoration: none;
+    }
+}
