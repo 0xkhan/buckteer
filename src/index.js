@@ -62,19 +62,23 @@ const fillModalForm = function() {
                 event.preventDefault();
                 const subModalID = event.target.getAttribute('data-submodal-confirm');
                 setValue({ subModalID: subModalID });
-                submodal.closeModal({ modalID: subModalID });
             });
         });
     }
 };
 
 const setValue = function({ subModalID }) {
-    const viewValue = document.querySelector(`[data-submodal-viewValue=${subModalID}]`);
-    const inputValue = document.querySelector(`[data-submodal-inputValue=${subModalID}]`);
+    const targetIDArray = subModalID.split('-');
+    const targetID = targetIDArray.length > 2 ? `${targetIDArray[0]}-${targetIDArray[1]}` : subModalID;
+    const viewValue = document.querySelector(`[data-submodal-viewValue=${targetID}]`);
+    const inputValue = document.querySelector(`[data-submodal-inputValue=${targetID}]`);
     const value = getValue({ subModalID });
 
     viewValue.innerText = subModalID === 'trip-budget' ? `$${value}` : value;
     inputValue.value = value;
+
+    // Close Modal
+    submodal.closeModal({ modalID: targetID });
 };
 
 const getValue = function({ subModalID }) {
