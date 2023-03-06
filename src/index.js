@@ -1,8 +1,12 @@
 import SassyModal from './js/plugins/SassyModal';
 import CtrlView from './js/plugins/CtrlView';
 import { resizeTextarea, navMarker } from './js/components/components';
+import { dataModalGoal } from './js/data/data';
+
 import logo from './assets/logo.svg';
 import baliImg from './assets/bali.jpg';
+
+import './js/tests/dataModalGoal.test.js';
 
 // Selectors
 const logoElem = document.querySelector('#logo');
@@ -94,6 +98,43 @@ const getValue = function({ subModalID }) {
     return inputValue;
 };
 
+const renderGoalModal = function({ data }) {
+    const elem = document.querySelector('[data-elem-id="form-goal"]');
+
+    const chevron = data.commonChevron;
+    const button = `
+        <div class="modal-form__extras-group u-center-text">
+            <button id="submit" class="btn btn--default" type="submit">Add Goal</button>
+        </div>
+    `;
+
+    elem.innerHTML = '';
+
+    data.dataArray.forEach((data) => {
+        const markup = `
+            <div class="modal-form__extras-group">
+                <a href="#" data-submodal-trigger="goal-activity">
+                    <label class="modal-form__label" for="">
+                        <span class="modal-form__label-icon">
+                            ${data.icon}
+                        </span>
+                        <span class="modal-form__label-text" data-submodal-viewValue="goal-activity">
+                            ${data.name}
+                        </span>
+                        <span class="modal-form__label-chevron">
+                            ${chevron}
+                        </span>
+                    </label>
+                </a>
+                <input id="list-cat" data-submodal-inputValue="goal-activity" class="modal-form__input modal-form__input--cat" type="hidden" >
+            </div>
+        `;
+        elem.insertAdjacentHTML('beforeend', markup);
+    });
+
+    elem.insertAdjacentHTML('beforeend', button);
+};
+
 
 // Initialize Sassy Modal
 const modal = new SassyModal({
@@ -127,6 +168,7 @@ const init = function() {
     fillModalForm();
     navMarker(footerNavMarker, footerNavItems);
     navMarker(modalNavMarker, modalNavItems);
+    renderGoalModal({ data: dataModalGoal });
 };
 
 init();
