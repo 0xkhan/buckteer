@@ -166,15 +166,21 @@ $modal-transform-y-axis-distance: 3rem;
         justify-content: space-around;
     }
 
+    &__search-results {
+        & a {
+            display: block;
+
+            &:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
     &__result {
         display: flex;
         column-gap: 2rem;
         align-items: center;
         pointer-events: none;
-
-        &:not(:last-child) {
-            margin-bottom: 2rem;
-        }
 
         &-img {
             width: 6rem;
@@ -194,6 +200,16 @@ $modal-transform-y-axis-distance: 3rem;
 
         &-address {
             font-size: 1.4rem;
+        }
+
+        &-icon {
+            width: 5rem;
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f2f2f4;
+            border-radius: 50rem;
         }
     }
 
