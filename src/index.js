@@ -1,5 +1,6 @@
 import SassyModal from './js/plugins/SassyModal';
 import CtrlView from './js/plugins/CtrlView';
+import router from './js/plugins/SPARouter';
 import { resizeTextarea, navMarker } from './js/components/components';
 import { dataModalGoal } from './js/data/data';
 
@@ -98,6 +99,7 @@ const getValue = function({ subModalID }) {
     return inputValue;
 };
 
+// Just temprory solution for showing something in modal
 const renderGoalModal = function({ data }) {
     const elem = document.querySelector('[data-elem-id="form-goal"]');
 
@@ -135,8 +137,43 @@ const renderGoalModal = function({ data }) {
     elem.insertAdjacentHTML('beforeend', button);
 };
 
+// Instantiate SPA Router
+const routes = {
+    404: {
+        template: './templates/404.html',
+        title: '404 Not Found',
+        description: 'This is the 404 page.'
+    },
+    '/': {
+        template: './templates/home.html',
+        title: 'Nomad Bindle',
+        description: 'Achieve your bucket list goals with ease and fun.'
+    },
+    '/map': {
+        template: './templates/map.html',
+        title: 'Map - Nomad Bindle',
+        description: 'Achieve your bucket list goals with ease and fun.'
+    }
+};
 
-// Initialize Sassy Modal
+router.setRoutes(routes).initRouter({ selector: '.footer-nav a' });
+
+// Loads map
+const loadMap = function() {
+    const body = document.querySelector('body');
+    if (window.location.pathname === "/map") {
+        const mapContainer = '<div id="map"></div>';
+        body.insertAdjacentHTML('beforeend', mapContainer);
+
+        const map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    }
+}
+
+// Instantiate Sassy Modal
 const modal = new SassyModal({
     blur: false,
     centered: true,
@@ -156,7 +193,7 @@ const submodal = new SassyModal({
     }
 });
 
-// Initialize Ctrl View
+// Instantiate Ctrl View
 const ctrlView = new CtrlView({
     activateElemCSS: "modal__form-extras--activate"
 });
@@ -169,6 +206,7 @@ const init = function() {
     navMarker(footerNavMarker, footerNavItems);
     navMarker(modalNavMarker, modalNavItems);
     renderGoalModal({ data: dataModalGoal });
+    loadMap();
 };
 
 init();
