@@ -1,6 +1,9 @@
 @use '../abstracts' as *;
 
 .header {
+    position: relative;
+    z-index: 1;
+
     &__left-half {
         grid-column: span 8;
         
